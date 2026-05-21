@@ -1,0 +1,205 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "f9de5edf4b2c0b10f048f44233fe7eef",
+    "entities": [
+      {
+        "tableName": "LOCATION_WEATHER_ENTITY",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `last_updated` INTEGER NOT NULL, `date` INTEGER NOT NULL, `location_name` TEXT NOT NULL, `location_region` TEXT, `location_country` TEXT NOT NULL, `location_latitude` TEXT NOT NULL, `location_longitude` TEXT NOT NULL, `is_current_location` INTEGER NOT NULL, `temperature_celsius` REAL NOT NULL, `temperature_fahrenheit` REAL NOT NULL, `min_temperature_celsius` REAL NOT NULL, `min_temperature_fahrenheit` REAL NOT NULL, `max_temperature_celsius` REAL NOT NULL, `max_temperature_fahrenheit` REAL NOT NULL, `feels_like_celsius` REAL NOT NULL, `feels_like_fahrenheit` REAL NOT NULL, `humidity` INTEGER NOT NULL, `wind_speed_kmh` REAL NOT NULL, `wind_speed_mph` REAL NOT NULL, `rain_chance` INTEGER NOT NULL, `condition` TEXT NOT NULL, `time_zone` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdated",
+            "columnName": "last_updated",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationName",
+            "columnName": "location_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationRegion",
+            "columnName": "location_region",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "locationCountry",
+            "columnName": "location_country",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLatitude",
+            "columnName": "location_latitude",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationLongitude",
+            "columnName": "location_longitude",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isCurrentLocation",
+            "columnName": "is_current_location",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "temperatureCelsius",
+            "columnName": "temperature_celsius",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "temperatureFahrenheit",
+            "columnName": "temperature_fahrenheit",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minTemperatureCelsius",
+            "columnName": "min_temperature_celsius",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "minTemperatureFahrenheit",
+            "columnName": "min_temperature_fahrenheit",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxTemperatureCelsius",
+            "columnName": "max_temperature_celsius",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "maxTemperatureFahrenheit",
+            "columnName": "max_temperature_fahrenheit",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "feelsLikeCelsius",
+            "columnName": "feels_like_celsius",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "feelsLikeFahrenheit",
+            "columnName": "feels_like_fahrenheit",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "humidity",
+            "columnName": "humidity",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "windSpeedKmh",
+            "columnName": "wind_speed_kmh",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "windSpeedMph",
+            "columnName": "wind_speed_mph",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rainChance",
+            "columnName": "rain_chance",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "condition",
+            "columnName": "condition",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timeZone",
+            "columnName": "time_zone",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "HOUR_FORECAST_ENTITY",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`temperature_celsius` REAL NOT NULL, `temperature_fahrenheit` REAL NOT NULL, `condition` TEXT NOT NULL, `time` INTEGER NOT NULL, `location_id` TEXT NOT NULL, PRIMARY KEY(`location_id`, `time`))",
+        "fields": [
+          {
+            "fieldPath": "temperatureCelsius",
+            "columnName": "temperature_celsius",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "temperatureFahrenheit",
+            "columnName": "temperature_fahrenheit",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "condition",
+            "columnName": "condition",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "locationId",
+            "columnName": "location_id",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "location_id",
+            "time"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f9de5edf4b2c0b10f048f44233fe7eef')"
+    ]
+  }
+}

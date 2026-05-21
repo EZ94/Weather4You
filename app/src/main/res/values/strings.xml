@@ -1,0 +1,143 @@
+<resources>
+    <string name="app_name">Weather4You</string>
+    <string name="location_permission_title">Welcome to the Weather4You App!</string>
+    <string name="this_app_would_like_to_access_your_location">Do you want to know the weather at your current location? Give the app permissions to use your location. Otherwise, you can just search whatever location you want to get started!</string>
+    <string name="location_permission_button_current">Use current location</string>
+    <string name="location_permission_button_search">Search location</string>
+    <string name="updating_forecast_out_of_date_string_param">Updating weather forecast. Last update: %s. The forecast displayed may be incomplete or out of date.</string>
+    <string name="updating_forecast">Updating weather forecast.</string>
+    <string name="network_error_out_of_date_string_param">Failed to update weather forecast. Last update: %s. The forecast displayed may be incomplete or out of date.</string>
+    <string name="network_error_forecast">Failed to update weather forecast.</string>
+    <string name="error_icon">Error icon</string>
+
+
+
+
+
+
+
+    <string name="day_1000">Sunny</string>
+    <string name="night_1000">Clear</string>
+    <string name="day_1003">Partly cloudy</string>
+    <string name="night_1003">Partly cloudy</string>
+    <string name="day_1006">Cloudy</string>
+    <string name="night_1006">Cloudy</string>
+    <string name="day_1009">Overcast</string>
+    <string name="night_1009">Overcast</string>
+    <string name="day_1030">Mist</string>
+    <string name="night_1030">Mist</string>
+    <string name="day_1063">Patchy rain possible</string>
+    <string name="night_1063">Patchy rain possible</string>
+    <string name="day_1066">Patchy snow possible</string>
+    <string name="night_1066">Patchy snow possible</string>
+    <string name="day_1069">Patchy sleet possible</string>
+    <string name="night_1069">Patchy sleet possible</string>
+    <string name="day_1072">Patchy freezing drizzle possible</string>
+    <string name="night_1072">Patchy freezing drizzle possible</string>
+    <string name="day_1087">Thundery outbreaks possible</string>
+    <string name="night_1087">Thundery outbreaks possible</string>
+    <string name="day_1114">Blowing snow</string>
+    <string name="night_1114">Blowing snow</string>
+    <string name="day_1117">Blizzard</string>
+    <string name="night_1117">Blizzard</string>
+    <string name="day_1135">Fog</string>
+    <string name="night_1135">Fog</string>
+    <string name="day_1147">Freezing fog</string>
+    <string name="night_1147">Freezing fog</string>
+    <string name="day_1150">Patchy light drizzle</string>
+    <string name="night_1150">Patchy light drizzle</string>
+    <string name="day_1153">Light drizzle</string>
+    <string name="night_1153">Light drizzle</string>
+    <string name="day_1168">Freezing drizzle</string>
+    <string name="night_1168">Freezing drizzle</string>
+    <string name="day_1171">Heavy freezing drizzle</string>
+    <string name="night_1171">Heavy freezing drizzle</string>
+    <string name="day_1180">Patchy light rain</string>
+    <string name="night_1180">Patchy light rain</string>
+    <string name="day_1183">Light rain</string>
+    <string name="night_1183">Light rain</string>
+    <string name="day_1186">Moderate rain at times</string>
+    <string name="night_1186">Moderate rain at times</string>
+    <string name="day_1189">Moderate rain</string>
+    <string name="night_1189">Moderate rain</string>
+    <string name="day_1192">Heavy rain at times</string>
+    <string name="night_1192">Heavy rain at times</string>
+    <string name="day_1195">Heavy rain</string>
+    <string name="night_1195">Heavy rain</string>
+    <string name="day_1198">Light freezing rain</string>
+    <string name="night_1198">Light freezing rain</string>
+    <string name="day_1201">Moderate or heavy freezing rain</string>
+    <string name="night_1201">Moderate or heavy freezing rain</string>
+    <string name="day_1204">Light sleet</string>
+    <string name="night_1204">Light sleet</string>
+    <string name="day_1207">Moderate or heavy sleet</string>
+    <string name="night_1207">Moderate or heavy sleet</string>
+    <string name="day_1210">Patchy light snow</string>
+    <string name="night_1210">Patchy light snow</string>
+    <string name="day_1213">Light snow</string>
+    <string name="night_1213">Light snow</string>
+    <string name="day_1216">Patchy moderate snow</string>
+    <string name="night_1216">Patchy moderate snow</string>
+    <string name="day_1219">Moderate snow</string>
+    <string name="night_1219">Moderate snow</string>
+    <string name="day_1222">Patchy heavy snow</string>
+    <string name="night_1222">Patchy heavy snow</string>
+    <string name="day_1225">Heavy snow</string>
+    <string name="night_1225">Heavy snow</string>
+    <string name="day_1237">Ice pellets</string>
+    <string name="night_1237">Ice pellets</string>
+    <string name="day_1240">Light rain shower</string>
+    <string name="night_1240">Light rain shower</string>
+    <string name="day_1243">Moderate or heavy rain shower</string>
+    <string name="night_1243">Moderate or heavy rain shower</string>
+    <string name="day_1246">Torrential rain shower</string>
+    <string name="night_1246">Torrential rain shower</string>
+    <string name="day_1249">Light sleet showers</string>
+    <string name="night_1249">Light sleet showers</string>
+    <string name="day_1252">Moderate or heavy sleet showers</string>
+    <string name="night_1252">Moderate or heavy sleet showers</string>
+    <string name="day_1255">Light snow showers</string>
+    <string name="night_1255">Light snow showers</string>
+    <string name="day_1258">Moderate or heavy snow showers</string>
+    <string name="night_1258">Moderate or heavy snow showers</string>
+    <string name="day_1261">Light showers of ice pellets</string>
+    <string name="night_1261">Light showers of ice pellets</string>
+    <string name="day_1264">Moderate or heavy showers of ice pellets</string>
+    <string name="night_1264">Moderate or heavy showers of ice pellets</string>
+    <string name="day_1273">Patchy light rain with thunder</string>
+    <string name="night_1273">Patchy light rain with thunder</string>
+    <string name="day_1276">Moderate or heavy rain with thunder</string>
+    <string name="night_1276">Moderate or heavy rain with thunder</string>
+    <string name="day_1279">Patchy light snow with thunder</string>
+    <string name="night_1279">Patchy light snow with thunder</string>
+    <string name="day_1282">Moderate or heavy snow with thunder</string>
+    <string name="night_1282">Moderate or heavy snow with thunder</string>
+
+
+
+
+
+
+
+    <string name="hour_forecast_title">24-hour forecast</string>
+    <string name="max_temperature">Max temperature</string>
+    <string name="min_temperature">Min temperature</string>
+    <string name="feels_like_string_param">Feels like %s</string>
+    <string name="list">List</string>
+    <string name="back">Back</string>
+    <string name="manage_locations">Manage Locations</string>
+    <string name="suggestions">Suggestions</string>
+    <string name="saved_locations">Saved Locations</string>
+    <string name="current_location">Current Location</string>
+    <string name="out_of_date_refreshing">The information displayed is out of date. Hang tight while we refresh it.</string>
+    <string name="out_of_date_error">An error occured while updating the weather forecast.</string>
+    <string name="no_locations_permission_granted">We are experiencing some issues while retrieving the weather forecast for your current location. While this issue persists you can manually search for your location.</string>
+    <string name="no_locations_permission_not_granted">Search a location to get started. If you want to know the weather for your current location go to the Settings and give W4YApp permission to use your location</string>
+    <string name="settings">Settings</string>
+    <string name="temperature_unit">Temperature Unit</string>
+    <string name="hour_unit">Hour Unit</string>
+    <string name="celsius">Celsius</string>
+    <string name="fahrenheit">Fahrenheit</string>
+    <string name="am_pm">AM/PM</string>
+    <string name="h24">24 Hours</string>
+</resources>
