@@ -29,7 +29,6 @@ class SearchRepositoryImpl @Inject constructor(
     }
 
 
-    // TODO: Deal with Errors
     override suspend fun addLocation(id: Int) {
         val forecastResult = weatherForecastRemoteDataSource.getSavedLocationWeatherForecast(id)
         if (forecastResult is W4YResult.Success)
