@@ -16,8 +16,10 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.resume
 
+@Singleton
 class GeolocationDataSourceImpl @Inject constructor(
     permissionChecker: PermissionChecker,
     private val fusedLocationProviderClient: FusedLocationProviderClient,

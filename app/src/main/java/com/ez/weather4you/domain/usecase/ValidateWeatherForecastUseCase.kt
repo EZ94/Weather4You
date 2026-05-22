@@ -5,18 +5,17 @@ import com.ez.weather4you.domain.entity.forecast.WeatherForecast
 import com.ez.weather4you.domain.entity.forecast.toLocalDateTime
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime
-import kotlinx.datetime.plus
 import kotlinx.datetime.toLocalDateTime
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.time.Clock
-import kotlin.time.Duration.Companion.hours
 import kotlin.time.Instant
 
+@Singleton
 class ValidateWeatherForecastUseCase @Inject constructor(private val clock: Clock) {
 
     operator fun invoke(forecast: WeatherForecast): WeatherForecast = with(forecast) {
         val currentInstant = clock.now()
-        //val currentHour = currentDateTime.truncateToHour()
 
         val filteredDayForecast = dayForecast.filter {
             val currentDateTime = currentInstant.toLocalDateTime(it.time.timeZone)
@@ -25,8 +24,6 @@ class ValidateWeatherForecastUseCase @Inject constructor(private val clock: Cloc
 
         val filteredHourForecast = hourForecast
             .filter {
-//                val currentHour = currentInstant.toLocalDateTime(it.time.timeZone).truncateToHour()
-//                it.time.toLocalDateTime().truncateToHour() >= currentHour
                 it.time.toLocalDateTime().truncateToHour() >= currentInstant.toLocalDateTime(it.time.timeZone).truncateToHour()
             }
             .take(24)

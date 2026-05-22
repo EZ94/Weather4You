@@ -6,7 +6,9 @@ import com.ez.weather4you.data.remote.retrofit.APIService
 import com.ez.weather4you.domain.entity.forecast.Coordinates
 import com.ez.weather4you.domain.entity.forecast.WeatherForecast
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class WeatherForecastRemoteDataSourceImpl @Inject constructor(private val service: APIService) :
     WeatherForecastRemoteDataSource {
     override suspend fun getCurrentLocationWeatherForecast(

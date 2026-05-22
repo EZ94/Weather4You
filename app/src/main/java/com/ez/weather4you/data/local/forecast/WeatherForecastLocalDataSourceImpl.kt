@@ -8,9 +8,11 @@ import com.ez.weather4you.domain.entity.forecast.WeatherForecast
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.time.Clock
 
 
+@Singleton
 class WeatherForecastLocalDataSourceImpl @Inject constructor(
     private val w4YDao: W4YDao,
     private val clock: Clock
@@ -25,7 +27,7 @@ class WeatherForecastLocalDataSourceImpl @Inject constructor(
     override fun getSavedLocationsWeatherForecastsFlow(includeCurrent: Boolean): Flow<List<WeatherForecast>> =
         (if (includeCurrent) w4YDao.getWeatherForecastForAllSavedLocationsFlow()
         else w4YDao.getWeatherForecastForSavedLocationsFlow(withIdDifferentFrom = CURRENT_LOCATION_ID))
-            .map { it.toDomain() }
+            .map { forecasts -> forecasts.map { it.toDomain() } }
 
     override suspend fun upsertWeatherForecast(weatherForecast: WeatherForecast) {
         w4YDao.upsertWeatherForecast(

@@ -6,13 +6,13 @@ import com.ez.weather4you.domain.entity.forecast.CurrentLocationWeatherForecastS
 import com.ez.weather4you.domain.entity.forecast.WeatherForecastState
 import com.ez.weather4you.domain.repository.GeolocationRepository
 import com.ez.weather4you.domain.repository.WeatherForecastRepository
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@ViewModelScoped
+@Singleton
 class WeatherForecastUseCase @Inject constructor(
     private val geolocationRepository: GeolocationRepository,
     private val validateWeatherForecastUseCase: ValidateWeatherForecastUseCase,

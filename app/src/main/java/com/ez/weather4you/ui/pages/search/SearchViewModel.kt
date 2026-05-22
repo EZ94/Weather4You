@@ -3,6 +3,7 @@ package com.ez.weather4you.ui.pages.search
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ez.weather4you.domain.repository.SearchRepository
+import com.ez.weather4you.domain.repository.WeatherForecastRepository
 import com.ez.weather4you.domain.usecase.FormatUnitUseCase
 import com.ez.weather4you.ui.pages.search.components.locations.toLocationComponentUIModel
 import com.ez.weather4you.ui.pages.search.components.search.SearchBoxUIModel
@@ -26,6 +27,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository,
+    private val weatherForecastRepository: WeatherForecastRepository,
     private val formatUnitUseCase: FormatUnitUseCase
 ) : ViewModel() {
 
@@ -43,7 +45,7 @@ class SearchViewModel @Inject constructor(
 
     val model: StateFlow<SearchPageUIModel> = combine(
         _query,
-        searchRepository.weatherForecasts,
+        weatherForecastRepository.weatherForecasts,
         searchRepository.suggestions
     ) { query, savedForecasts, suggestions ->
 
@@ -85,14 +87,14 @@ class SearchViewModel @Inject constructor(
 
     fun addLocation(locationId: Int) {
         viewModelScope.launch {
-            searchRepository.addLocation(locationId)
+            weatherForecastRepository.addLocation(locationId)
             _query.value = ""
         }
     }
 
     fun deleteLocation(id: Int) {
         viewModelScope.launch {
-            searchRepository.deleteSavedLocation(id)
+            weatherForecastRepository.deleteSavedLocation(id)
         }
     }
 }

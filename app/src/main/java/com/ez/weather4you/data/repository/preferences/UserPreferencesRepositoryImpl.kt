@@ -1,13 +1,14 @@
 package com.ez.weather4you.data.repository.preferences
 
-import android.icu.util.LocaleData
 import com.ez.weather4you.data.local.preferences.UserPreferencesLocalDataSource
 import com.ez.weather4you.domain.entity.HourUnit
 import com.ez.weather4you.domain.entity.SpeedUnit
 import com.ez.weather4you.domain.entity.TemperatureUnit
 import com.ez.weather4you.domain.repository.UserPreferencesRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class UserPreferencesRepositoryImpl @Inject constructor(
     private val userPreferencesLocalDataSource: UserPreferencesLocalDataSource
 ) :

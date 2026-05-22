@@ -5,7 +5,6 @@ import com.ez.weather4you.domain.entity.TemperatureUnit
 import com.ez.weather4you.domain.entity.forecast.LocalizedTime
 import com.ez.weather4you.domain.entity.forecast.Temperature
 import com.ez.weather4you.domain.repository.UserPreferencesRepository
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,9 +14,10 @@ import kotlinx.datetime.format
 import kotlinx.datetime.format.Padding
 import kotlinx.datetime.toLocalDateTime
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.time.Instant
 
-@ViewModelScoped
+@Singleton
 class FormatUnitUseCase @Inject constructor(private val userPreferencesRepository: UserPreferencesRepository) {
 
     private val _temperatureUnit: MutableStateFlow<TemperatureUnit?> = MutableStateFlow(null)

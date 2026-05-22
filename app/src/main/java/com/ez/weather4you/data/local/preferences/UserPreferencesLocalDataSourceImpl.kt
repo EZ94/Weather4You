@@ -1,7 +1,6 @@
 package com.ez.weather4you.data.local.preferences
 
 import android.icu.util.LocaleData
-import android.icu.util.ULocale
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
@@ -14,7 +13,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class UserPreferencesLocalDataSourceImpl @Inject constructor(
     val dataStore: DataStore<Preferences>,
     measurementSystem: LocaleData.MeasurementSystem

@@ -15,10 +15,12 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.time.Clock
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Instant
 
+@Singleton
 class WeatherForecastRepositoryImpl @Inject constructor(
     private val localDataSource: WeatherForecastLocalDataSource,
     private val remoteDataSource: WeatherForecastRemoteDataSource,
@@ -40,6 +42,9 @@ class WeatherForecastRepositoryImpl @Inject constructor(
             }
 
         }
+
+    override val weatherForecasts: Flow<List<WeatherForecast>> =
+        localDataSource.getSavedLocationsWeatherForecastsFlow(true)
 
 
     override suspend fun getFreshCurrentLocationWeatherForecast(coordinates: Coordinates): W4YResult<WeatherForecast> =
@@ -75,6 +80,16 @@ class WeatherForecastRepositoryImpl @Inject constructor(
 
     override suspend fun deleteCurrentLocation() {
         localDataSource.deleteSavedLocation(locationId = CURRENT_LOCATION_ID)
+    }
+
+    override suspend fun addLocation(id: Int) {
+        val forecastResult = remoteDataSource.getSavedLocationWeatherForecast(id)
+        if (forecastResult is W4YResult.Success)
+            localDataSource.upsertWeatherForecast(forecastResult.value)
+    }
+
+    override suspend fun deleteSavedLocation(id: Int) {
+        localDataSource.deleteSavedLocation(id)
     }
 
     private fun WeatherForecast.isStale(): Boolean {
