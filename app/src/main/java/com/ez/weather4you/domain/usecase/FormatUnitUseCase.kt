@@ -44,12 +44,4 @@ class FormatUnitUseCase @Inject constructor(private val userPreferencesRepositor
                 amPmHour(Padding.NONE)
                 amPmMarker("am", "pm")
             })
-
-    suspend fun update(unit: TemperatureUnit) {
-        userPreferencesRepository.updateTemperatureUnit(unit)
-    }
-
-    suspend fun update(unit: HourUnit) {
-        userPreferencesRepository.updateHourUnit(unit)
-    }
 }
