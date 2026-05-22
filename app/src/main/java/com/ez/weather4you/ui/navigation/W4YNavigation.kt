@@ -7,7 +7,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSerializable
-import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
@@ -21,7 +20,6 @@ import com.ez.weather4you.ui.pages.onboarding.OnboardingViewModel
 import com.ez.weather4you.ui.pages.search.SearchPage
 import com.ez.weather4you.ui.pages.search.SearchViewModel
 import com.ez.weather4you.ui.pages.settings.SettingsPage
-import com.ez.weather4you.ui.pages.settings.SettingsViewModel
 import com.ez.weather4you.ui.pages.weatherforecast.LocationsForecastPage
 import com.ez.weather4you.ui.pages.weatherforecast.LocationsForecastViewModel
 import kotlinx.serialization.serializer
