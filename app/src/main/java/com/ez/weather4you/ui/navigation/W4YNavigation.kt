@@ -52,13 +52,13 @@ fun W4YNavigation(initialPage: W4YNavKey) {
                             factory.create(backStack)
                         }
                     )
-                val state by viewModel.state.collectAsState()
+                val state by viewModel.uiState.collectAsState()
                 LocationsForecastPage(state)
             }
             entry<SearchPageKey>(metadata = BottomSheetSceneStrategy.bottomSheet()) {
                 val viewModel: SearchViewModel = viewModel()
-                val model by viewModel.model.collectAsState()
-                SearchPage(model = model)
+                val state by viewModel.uiState.collectAsState()
+                SearchPage(state = state)
             }
             entry<SettingsPageKey> {
                 SettingsPage(onBack = { backStack.removeLastOrNull() })

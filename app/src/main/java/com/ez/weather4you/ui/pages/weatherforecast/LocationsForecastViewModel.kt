@@ -28,15 +28,9 @@ class LocationsForecastViewModel @AssistedInject constructor(
     private val weatherForecastUseCase: WeatherForecastUseCase,
     private val formatUnitUseCase: FormatUnitUseCase,
     @Assisted private val navBackStack: NavBackStack<W4YNavKey>
-) :
-    ViewModel() {
+) : ViewModel() {
 
-    private val _currentLocation = weatherForecastUseCase.getCurrentLocationFlow()
-
-    private val _savedLocations =
-        weatherForecastUseCase.weatherForecast
-
-    private val _refresh: MutableSharedFlow<Unit> = MutableSharedFlow(replay = 1)
+    private val _refresh = MutableSharedFlow<Unit>(replay = 1)
 
     init {
         viewModelScope.launch {
@@ -47,44 +41,55 @@ class LocationsForecastViewModel @AssistedInject constructor(
         }
     }
 
-    val state: StateFlow<LocationsForecastPageState> =
-        combine(_currentLocation, _savedLocations, _refresh) { currentLocation, savedLocations, _ ->
+    val uiState: StateFlow<LocationsForecastUiState> =
+        combine(
+            weatherForecastUseCase.getCurrentLocationFlow(),
+            weatherForecastUseCase.weatherForecast,
+            _refresh
+        ) { currentLocation, savedLocations, _ ->
             if (currentLocation is CurrentLocationWeatherForecastState.Empty && savedLocations.isEmpty()) {
                 val message =
                     if (currentLocation.isPermissionGranted) R.string.no_locations_permission_granted
                     else R.string.no_locations_permission_not_granted
-                LocationsForecastPageState.NoLocations(
+                LocationsForecastUiState.NoLocations(
                     NoLocationsScreenUIModel(
                         message = message,
-                        onClick = { openSearchPage() }
+                        onClick = { onIntent(LocationsForecastUiIntent.OpenSearch) }
                     )
                 )
-            } else LocationsForecastPageState.LocationsAvailable(
-                model =
-                    ((if (currentLocation is CurrentLocationWeatherForecastState.Available)
-                        listOf(currentLocation.state)
-                    else listOf()) + savedLocations).toUIModel(
-                        formatUnitUseCase = formatUnitUseCase,
-                        onFabClick = { openSearchPage() },
-                        onSettingsClick = { openSettingsPage() },
-                        onVisibilityChange = { refresh(it) }
-                    )
+            } else LocationsForecastUiState.LocationsAvailable(
+                model = ((if (currentLocation is CurrentLocationWeatherForecastState.Available)
+                    listOf(currentLocation.state)
+                else listOf()) + savedLocations).toUIModel(
+                    formatUnitUseCase = formatUnitUseCase,
+                    onFabClick = { onIntent(LocationsForecastUiIntent.OpenSearch) },
+                    onSettingsClick = { onIntent(LocationsForecastUiIntent.OpenSettings) },
+                    onVisibilityChange = { onIntent(LocationsForecastUiIntent.Refresh(it)) }
+                )
             )
         }.stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = LocationsForecastPageState.Initial
+            initialValue = LocationsForecastUiState.Initial
         )
 
-    fun openSearchPage() {
+    fun onIntent(intent: LocationsForecastUiIntent) {
+        when (intent) {
+            is LocationsForecastUiIntent.OpenSearch -> openSearchPage()
+            is LocationsForecastUiIntent.OpenSettings -> openSettingsPage()
+            is LocationsForecastUiIntent.Refresh -> refresh(intent.isVisible)
+        }
+    }
+
+    private fun openSearchPage() {
         navBackStack.add(SearchPageKey)
     }
 
-    fun openSettingsPage() {
+    private fun openSettingsPage() {
         navBackStack.add(SettingsPageKey)
     }
 
-    fun refresh(isVisible: Boolean) {
+    private fun refresh(isVisible: Boolean) {
         if (isVisible) {
             viewModelScope.launch {
                 _refresh.emit(Unit)

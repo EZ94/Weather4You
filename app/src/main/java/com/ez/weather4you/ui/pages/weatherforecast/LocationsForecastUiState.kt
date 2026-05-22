@@ -3,11 +3,11 @@ package com.ez.weather4you.ui.pages.weatherforecast
 import com.ez.weather4you.ui.pages.weatherforecast.screens.location.LocationsForecastScreenUIModel
 import com.ez.weather4you.ui.pages.weatherforecast.screens.nolocations.NoLocationsScreenUIModel
 
-sealed interface LocationsForecastPageState {
-    object Initial : LocationsForecastPageState
+sealed interface LocationsForecastUiState {
+    data object Initial : LocationsForecastUiState
     data class NoLocations(val model: NoLocationsScreenUIModel) :
-        LocationsForecastPageState
+        LocationsForecastUiState
 
     data class LocationsAvailable(val model: LocationsForecastScreenUIModel) :
-        LocationsForecastPageState
+        LocationsForecastUiState
 }

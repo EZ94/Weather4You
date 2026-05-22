@@ -6,11 +6,11 @@ import com.ez.weather4you.ui.pages.weatherforecast.screens.initial.InitialScreen
 import com.ez.weather4you.ui.pages.weatherforecast.screens.nolocations.NoLocationsScreen
 
 @Composable
-fun LocationsForecastPage(state: LocationsForecastPageState) {
+fun LocationsForecastPage(state: LocationsForecastUiState) {
     when (state) {
-        is LocationsForecastPageState.Initial -> InitialScreen()
-        is LocationsForecastPageState.NoLocations -> NoLocationsScreen(state.model)
-        is LocationsForecastPageState.LocationsAvailable -> LocationsForecastScreen(state.model)
+        is LocationsForecastUiState.Initial -> InitialScreen()
+        is LocationsForecastUiState.NoLocations -> NoLocationsScreen(state.model)
+        is LocationsForecastUiState.LocationsAvailable -> LocationsForecastScreen(state.model)
     }
 
 }

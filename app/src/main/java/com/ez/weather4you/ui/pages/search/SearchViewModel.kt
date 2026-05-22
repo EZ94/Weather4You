@@ -43,7 +43,7 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    val model: StateFlow<SearchPageUIModel> = combine(
+    val uiState: StateFlow<SearchUiState> = combine(
         _query,
         weatherForecastRepository.weatherForecasts,
         searchRepository.suggestions
@@ -57,7 +57,7 @@ class SearchViewModel @Inject constructor(
             .take(5).toSuggestionUIModel()
         val suggestionComponentUIModel = SuggestionComponentUIModel(
             suggestions = filteredSuggestions,
-            onClick = { addLocation(it) }
+            onClick = { onIntent(SearchUiIntent.AddLocation(it)) }
         )
 
         val locationsComponentUIModel = savedForecasts.toLocationComponentUIModel(
@@ -65,12 +65,12 @@ class SearchViewModel @Inject constructor(
             filterLocationName = {
                 it.startsWith(query, ignoreCase = true)
             },
-            onSwipe = { deleteLocation(it) }
+            onSwipe = { onIntent(SearchUiIntent.DeleteLocation(it)) }
         )
 
-        val searchBoxUIModel = SearchBoxUIModel(query, { onQueryChange(it) })
+        val searchBoxUIModel = SearchBoxUIModel(query, { onIntent(SearchUiIntent.QueryChange(it)) })
 
-        SearchPageUIModel(
+        SearchUiState(
             searchBoxUIModel = searchBoxUIModel,
             suggestionComponentUIModel = suggestionComponentUIModel,
             locationsComponentUIModel = locationsComponentUIModel
@@ -78,21 +78,29 @@ class SearchViewModel @Inject constructor(
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = SearchPageUIModel.getDefault()
+        initialValue = SearchUiState.getDefault()
     )
 
-    fun onQueryChange(newQuery: String) {
+    fun onIntent(intent: SearchUiIntent) {
+        when (intent) {
+            is SearchUiIntent.QueryChange -> onQueryChange(intent.newQuery)
+            is SearchUiIntent.AddLocation -> addLocation(intent.locationId)
+            is SearchUiIntent.DeleteLocation -> deleteLocation(intent.id)
+        }
+    }
+
+    private fun onQueryChange(newQuery: String) {
         _query.value = newQuery
     }
 
-    fun addLocation(locationId: Int) {
+    private fun addLocation(locationId: Int) {
         viewModelScope.launch {
             weatherForecastRepository.addLocation(locationId)
             _query.value = ""
         }
     }
 
-    fun deleteLocation(id: Int) {
+    private fun deleteLocation(id: Int) {
         viewModelScope.launch {
             weatherForecastRepository.deleteSavedLocation(id)
         }

@@ -35,7 +35,7 @@ fun SettingsPage(
     onBack: () -> Unit,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
-    val preferences by viewModel.preferences.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = {
@@ -64,8 +64,8 @@ fun SettingsPage(
             )
             Spacer(modifier = Modifier.height(8.dp))
             TemperatureUnitSegmentedButton(
-                selectedUnit = preferences?.temperatureUnit ?: TemperatureUnit.CELSIUS,
-                onUnitSelected = viewModel::updateTemperatureUnit
+                selectedUnit = uiState.preferences?.temperatureUnit ?: TemperatureUnit.CELSIUS,
+                onUnitSelected = { viewModel.onIntent(SettingsUiIntent.UpdateTemperatureUnit(it)) }
             )
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -76,8 +76,8 @@ fun SettingsPage(
             )
             Spacer(modifier = Modifier.height(8.dp))
             HourUnitSegmentedButton(
-                selectedUnit = preferences?.hourUnit ?: HourUnit.H24,
-                onUnitSelected = viewModel::updateHourUnit
+                selectedUnit = uiState.preferences?.hourUnit ?: HourUnit.H24,
+                onUnitSelected = { viewModel.onIntent(SettingsUiIntent.UpdateHourUnit(it)) }
             )
         }
     }

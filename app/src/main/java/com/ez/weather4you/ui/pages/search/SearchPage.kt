@@ -28,7 +28,7 @@ import com.ez.weather4you.ui.pages.search.components.suggestion.SuggestionCompon
 
 @Composable
 fun SearchPage(
-    model: SearchPageUIModel
+    state: SearchUiState
 ) {
     Column(
         modifier = Modifier.fillMaxWidth().fillMaxHeight(0.9f).padding(16.dp)
@@ -47,43 +47,43 @@ fun SearchPage(
 
         SearchBox(
             modifier = Modifier,
-            model = model.searchBoxUIModel
+            model = state.searchBoxUIModel
         )
 
         SuggestionComponent(
             Modifier.padding(horizontal = 16.dp),
-            model = model.suggestionComponentUIModel
+            model = state.suggestionComponentUIModel
         )
 
-        if (model.suggestionComponentUIModel.suggestions.isNotEmpty() && model.locationsComponentUIModel.savedLocations.isNotEmpty()) HorizontalDivider(
+        if (state.suggestionComponentUIModel.suggestions.isNotEmpty() && state.locationsComponentUIModel.savedLocations.isNotEmpty()) HorizontalDivider(
             modifier = Modifier.size(height = 8.dp, width = 0.dp)
         )
 
         LocationsComponent(
             modifier = Modifier.padding(horizontal = 16.dp),
-            model = model.locationsComponentUIModel
+            model = state.locationsComponentUIModel
         )
     }
 }
 
-class SearchUIStateParameterProvider : PreviewParameterProvider<SearchPageUIModel> {
+class SearchUIStateParameterProvider : PreviewParameterProvider<SearchUiState> {
 
     private val searchBoxValues = SearchBoxUIModelPreviewParameterProvider().values
     private val suggestionsValues = SuggestionComponentParameterProvider().values
     private val locationValues = LocationsComponentUIModelProvider().values
-    override val values: Sequence<SearchPageUIModel> =
+    override val values: Sequence<SearchUiState> =
         searchBoxValues.zip(suggestionsValues)
             .zip(locationValues) { (search, suggestions), locations ->
-                SearchPageUIModel(search, locations, suggestions)
+                SearchUiState(search, locations, suggestions)
             }
 }
 
 @Preview(showBackground = true, device = PIXEL_9)
 @Composable
 fun SearchPagePreview(
-    @PreviewParameter(SearchUIStateParameterProvider::class) model: SearchPageUIModel
+    @PreviewParameter(SearchUIStateParameterProvider::class) state: SearchUiState
 ) {
     SearchPage(
-        model = model
+        state = state
     )
 }

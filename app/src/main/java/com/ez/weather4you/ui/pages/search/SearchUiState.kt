@@ -4,13 +4,13 @@ import com.ez.weather4you.ui.pages.search.components.locations.LocationComponent
 import com.ez.weather4you.ui.pages.search.components.search.SearchBoxUIModel
 import com.ez.weather4you.ui.pages.search.components.suggestion.SuggestionComponentUIModel
 
-data class SearchPageUIModel(
+data class SearchUiState(
     val searchBoxUIModel: SearchBoxUIModel,
     val locationsComponentUIModel: LocationComponentUIModel,
     val suggestionComponentUIModel: SuggestionComponentUIModel
 ) {
     companion object {
-        fun getDefault() = SearchPageUIModel(
+        fun getDefault() = SearchUiState(
             SearchBoxUIModel.getDefault(),
             LocationComponentUIModel.getDefault(),
             SuggestionComponentUIModel.getDefault()
